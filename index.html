@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
     <title>F1 Manager 2026 | Dev Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
@@ -23,7 +28,6 @@
             padding: 0;
         }
 
-        /* --- UI Header --- */
         header {
             padding: 60px 20px;
             text-align: center;
@@ -59,7 +63,6 @@
             padding: 0 20px;
         }
 
-        /* --- Sections Grid --- */
         .main-grid {
             display: grid;
             grid-template-columns: 1.5fr 1fr;
@@ -88,9 +91,26 @@
             gap: 10px;
         }
 
-        p { font-size: 1.2rem; line-height: 1.6; color: #ccc; }
+        /* Video Wrapper pre zachovanie pomeru strán 16:9 */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            margin: 20px 0;
+        }
 
-        /* --- Specific Content --- */
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        p { font-size: 1.2rem; line-height: 1.6; color: #ccc; }
         ul { padding-left: 20px; color: #bbb; }
         li { margin-bottom: 8px; font-size: 1.1rem; }
 
@@ -105,7 +125,6 @@
             margin-top: 10px;
         }
 
-        /* --- Download Area --- */
         .download-zone {
             background: linear-gradient(45deg, #e10600, #aa0500);
             padding: 40px;
@@ -144,8 +163,12 @@
     <div class="container">
         
         <div class="card highlight">
-            <h2>📢 LATEST ANNOUNCEMENT</h2>
-            <p>Welcome to the Dev Portal! The game is currently in a pre-alpha state as part of a school project. I am focusing on core engine stability and basic UI implementation. Thank you for testing!</p>
+            <h2>📢 LATEST UPDATES & GAMEPLAY</h2>
+            <p>Welcome to the Dev Portal! The game is currently in a pre-alpha state. Check out the latest footage below.</p>
+            
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+            </div>
         </div>
 
         <div class="main-grid">
@@ -161,8 +184,8 @@
                     <h2>⚠️ KNOWN BUGS</h2>
                     <ul>
                         <li>Video scaling issues on 21:9 monitors.</li>
-                        <li>Ending of game is not finished</li>
-                        <li>You cant get money for good results</li>
+                        <li>Ending of game is not finished.</li>
+                        <li>You can't get money for good results (Economy fix coming soon).</li>
                     </ul>
                 </div>
             </div>
@@ -174,7 +197,7 @@
                         <li>Full 2026 Regulation changes.</li>
                         <li>Dynamic driver market (AI transfers).</li>
                         <li>Start of the race (lights out) mini-game.</li>
-                        <li>Getting money based on your results and team type</li>
+                        <li>Getting money based on your results and team type.</li>
                     </ul>
                 </div>
 
