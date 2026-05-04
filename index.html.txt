@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Manager 2026</title>
+    <style>
+        /* Definícia farieb podľa tvojho WPF */
+        :root {
+            --bg-color: #050505;
+            --panel-bg: #0A0A0A;
+            --f1-red: #E10600;
+            --border-color: #333;
+            --text-gray: #AAA;
+            --nav-bg: #111;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: var(--bg-color);
+            color: white;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Header - Horná lišta */
+        header {
+            height: 90px;
+            background: var(--panel-bg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 60px;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .team-name {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .authors-box {
+            background: #151515;
+            border: 1px solid var(--f1-red);
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-align: right;
+        }
+
+        /* Main Content - 3 stĺpce */
+        main {
+            display: grid;
+            grid-template-columns: 420px 1fr 420px;
+            gap: 40px;
+            padding: 40px 60px;
+            min-height: calc(100vh - 290px);
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+        }
+
+        /* Download Sekcia (Pravý panel) */
+        .download-box {
+            border-left: 3px solid var(--f1-red);
+            background: #111;
+        }
+
+        .btn-download {
+            display: block;
+            width: 100%;
+            height: 60px;
+            background: var(--nav-bg);
+            color: white;
+            border: 1px solid #222;
+            text-align: center;
+            line-height: 60px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.3s;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn-download:hover {
+            background: var(--f1-red);
+            border-color: var(--f1-red);
+        }
+
+        .mobile-msg {
+            display: none;
+            color: var(--f1-red);
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            border: 1px dashed var(--f1-red);
+        }
+
+        /* Diskusia */
+        .discussion-box {
+            margin-top: 20px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-logs {
+            flex-grow: 1;
+            background: #050505;
+            padding: 10px;
+            font-family: 'Consolas', monospace;
+            font-size: 13px;
+            color: #888;
+            overflow-y: auto;
+            border: 1px solid #222;
+        }
+
+        .chat-input {
+            background: #111;
+            border: 1px solid #333;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            height: 100px;
+            background: var(--panel-bg);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 60px;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            background: var(--nav-bg);
+            color: var(--text-gray);
+            border: 1px solid #222;
+            padding: 10px 25px;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: var(--f1-red);
+            color: white;
+        }
+
+        /* Responzivita pre mobil */
+        @media (max-width: 1000px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+            header, footer { padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-section">
+            <div class="team-name">F1 MANAGER 2026</div>
+        </div>
+        <div class="authors-box">
+            <div style="font-size: 12px; color: #888;">VYTVORILI:</div>
+            <div style="font-weight: bold;">M. Šustek & M. Tichý</div>
+        </div>
+    </header>
+
+    <main>
+        <section class="panel">
+            <h3 style="color: var(--f1-red); font-size: 14px;">GAME INFO</h3>
+            <p style="color: #888; line-height: 1.6;">
+                Staň sa manažérom stajne F1 v kritickej sezóne 2026. 
+                Rob strategické rozhodnutia, vyvíjaj monopost a doveď svoj tím k titulu majstra sveta.
+            </p>
+            <div style="margin-top: 40px;">
+                <p style="font-size: 12px; color: #555;">DISCORD KONTAKT:</p>
+                <p style="color: white; font-weight: bold;">thunderball885</p>
+            </div>
+        </section>
+
+        <section style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
+            <h1 style="opacity: 0.1; font-size: 100px; margin: 0;">SF-26</h1>
+            <div style="color: var(--f1-red); font-weight: bold; letter-spacing: 5px;">STRÁNKA VO VÝVOJI</div>
+        </section>
+
+        <section>
+            <div class="panel download-box">
+                <h3 style="font-size: 12px; color: #555; margin: 0;">DOWNLOAD AREA</h3>
+                
+                <div id="pc-view">
+                    <a href="tvoja_hra.zip" class="btn-download">DOWNLOAD GAME</a>
+                </div>
+                
+                <div id="mobile-view" class="mobile-msg">
+                    Zatiaľ sa to nedá (Hra je len pre PC)
+                </div>
+            </div>
+
+            <div class="panel discussion-box">
+                <h3 style="font-size: 10px; color: #333; margin-bottom: 10px;">ANONYMNÁ DISKUSIA</h3>
+                <div id="chat-logs">
+                    [SYSTEM]: Vitajte v diskusii.<br>
+                    [USER]: Kedy vyjde nová verzia?<br>
+                    [ADMIN]: Pracujeme na optimalizácii grafiky.
+                </div>
+                <input type="text" class="chat-input" placeholder="Napíš správu anonymne..." id="chat-input">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a href="https://discord.com" class="nav-btn">DISCORD</a>
+        <a href="#" class="nav-btn">CALENDAR</a>
+        <a href="#" class="nav-btn">WDC</a>
+        <a href="#" class="nav-btn" style="color: var(--f1-red);">EXIT</a>
+    </footer>
+
+    <script>
+        // Detekcia zariadenia
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (isMobile) {
+            document.getElementById('pc-view').style.display = 'none';
+            document.getElementById('mobile-view').style.display = 'block';
+        }
+
+        // Jednoduchá simulácia chatu (len vizuálna pre teba teraz)
+        const chatInput = document.getElementById('chat-input');
+        const chatLogs = document.getElementById('chat-logs');
+
+        chatInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' && this.value !== '') {
+                chatLogs.innerHTML += `<br>[ANONYM]: ${this.value}`;
+                this.value = '';
+                chatLogs.scrollTop = chatLogs.scrollHeight;
+            }
+        });
+    </script>
+
+</body>
+</html>
