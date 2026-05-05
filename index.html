@@ -91,7 +91,6 @@
             gap: 10px;
         }
 
-        /* Video Wrapper pre zachovanie pomeru strán 16:9 */
         .video-wrapper {
             position: relative;
             padding-bottom: 56.25%;
@@ -147,7 +146,16 @@
 
         .btn-main:hover { transform: scale(1.05); background: var(--f1-black); color: white; }
 
-        footer { text-align: center; padding: 40px; color: #555; border-top: 1px solid #222; }
+        footer { 
+            text-align: center; 
+            padding: 50px 20px; 
+            color: #555; 
+            border-top: 1px solid #222; 
+        }
+
+        .visitor-counter {
+            margin-bottom: 20px;
+        }
 
         @media (max-width: 850px) { .main-grid { grid-template-columns: 1fr; } }
         @media (max-width: 600px) { .download-zone { display: none; } }
@@ -186,7 +194,7 @@
                         <li>Video scaling issues on 21:9 monitors.</li>
                         <li>Ending of game is not finished.</li>
                         <li>You can't get money for good results (Economy fix coming soon).</li>
-                        <li>Bug with Alfa Romeo logo</li>
+                        <li>Bug with Alfa Romeo logo.</li>
                     </ul>
                 </div>
             </div>
@@ -220,6 +228,9 @@
     </div>
 
     <footer>
+        <div class="visitor-counter">
+            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fmatej885.github.io%2FF1Manager.github.io&count_bg=%23E10600&title_bg=%23333333&icon=&icon_color=%23E7E7E7&title=TOTAL+VIEWS&edge_flat=false" alt="Visitor Counter"/>
+        </div>
         &copy; 2026 F1 Manager Dev Portal | Not affiliated with Liberty Media or FIA.
     </footer>
 
