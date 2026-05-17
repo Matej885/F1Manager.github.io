@@ -350,13 +350,12 @@
             background: #333344 !important;
             color: #888899 !important;
             cursor: not-allowed !important;
-            pointer-events: none; /* Úplne zruší možnosť kliknúť */
+            pointer-events: none; 
             transform: none !important;
             box-shadow: none !important;
             border: 1px solid #444455;
         }
 
-        /* Animácia pre točenie hodiniek */
         .btn-main.updating i {
             animation: spinHourglass 2s infinite linear;
         }
@@ -364,7 +363,7 @@
         @keyframes spinHourglass {
             0% { transform: rotate(0deg); }
             45% { transform: rotate(180deg); }
-            100% { transform: rotate(180deg); } /* Kratučká pauza na konci otočenia */
+            100% { transform: rotate(180deg); } 
         }
 
         footer { 
@@ -475,7 +474,7 @@
                     <h2><i class="fa-solid fa-heart"></i> SUPPORT THE DEVELOPMENT</h2>
                     <p>George Russell isn't the only George who can deliver a fast package! If you would like to support the student development of this F1 simulator, you can send a quick tip for coffee directly via Payme (Slovenská sporiteľňa / George).</p>
                     
-                    <a href="https://payme.sk/?V=1&IBAN=SK6709000000005205692365&CC=EUR&CN=%C5%A0ustek+Matej&AM=1.00 class="george-large-btn">
+                    <a href="https://payme.sk/?v=1&IBAN=SK6709000000005205692365&CC=EUR&CN=Sustek+Matej&MSG=DONATE" target="_blank" class="george-large-btn">
                         <i class="fa-solid fa-mobile-screen-button"></i> SEND VIA GEORGE (PAYME)
                     </a>
 
@@ -523,13 +522,11 @@
             const btn = document.getElementById('downloadBtn');
             const btnText = document.getElementById('downloadBtnText');
 
-            // Ak prebieha update (na začiatku súboru nastavené na true)
             if (typeof UPDATE_IN_PROGRESS !== 'undefined' && UPDATE_IN_PROGRESS) {
-                btn.classList.add('updating'); // Nastaví sivý vzhľad a kurzor stop
-                btn.removeAttribute('href');    // Úplne odstráni odkaz na sťahovanie
-                btn.removeAttribute('target');  // Zruší otváranie nového okna
+                btn.classList.add('updating'); 
+                btn.removeAttribute('href');    
+                btn.removeAttribute('target');  
                 
-                // Zmení ikonu na presýpacie hodiny a prepíše text
                 btn.innerHTML = '<i class="fa-solid fa-hourglass-start"></i> <span>UPDATE IN PROGRESS...</span>';
             }
         });
