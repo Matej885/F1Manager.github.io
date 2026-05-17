@@ -12,6 +12,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <script>
+        // ================================================================
+        // CONFIGURATION PRE PREMENÚVERZIU (ÚDRŽBA):
+        // true  = Nahrávaš update. Gombík sa zablokuje, svieti na sivo a točia sa hodiny.
+        // false = Update je hotový. Gombík je plne funkčný a sťahuje hru.
+        // ================================================================
+        const UPDATE_IN_PROGRESS = true; 
+    </script>
+
     <style>
         :root {
             --f1-red: #e10600;
@@ -310,6 +319,7 @@
             font-style: italic;
         }
 
+        /* KLASICKÝ DOWNLOAD BUTTON */
         .btn-main {
             display: inline-flex;
             align-items: center;
@@ -333,6 +343,28 @@
             background: var(--f1-black); 
             color: #ffffff; 
             box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+        }
+
+        /* ŠTÝL PRE ZABLOKOVANÝ GOMBÍK POČAS UPDATE */
+        .btn-main.updating {
+            background: #333344 !important;
+            color: #888899 !important;
+            cursor: not-allowed !important;
+            pointer-events: none; /* Úplne zruší možnosť kliknúť */
+            transform: none !important;
+            box-shadow: none !important;
+            border: 1px solid #444455;
+        }
+
+        /* Animácia pre točenie hodiniek */
+        .btn-main.updating i {
+            animation: spinHourglass 2s infinite linear;
+        }
+
+        @keyframes spinHourglass {
+            0% { transform: rotate(0deg); }
+            45% { transform: rotate(180deg); }
+            100% { transform: rotate(180deg); } /* Kratučká pauza na konci otočenia */
         }
 
         footer { 
@@ -478,12 +510,30 @@
         <div class="download-zone">
             <h2>READY TO DEPLOY?</h2>
             <p style="color: #f1f5f9; opacity: 0.95; font-size: 1.25rem; font-weight: 400;">Download the full standalone game package.</p>
-            <a href="https://drive.google.com/file/d/1Egwdx5F0tLITLk10d502BGIfDrw0UqPO/view?usp=sharing" target="_blank" class="btn-main">
-                <i class="fa-solid fa-cloud-arrow-down"></i> DOWNLOAD THE GAME
+            
+            <a id="downloadBtn" href="https://drive.google.com/file/d/1Egwdx5F0tLITLk10d502BGIfDrw0UqPO/view?usp=sharing" target="_blank" class="btn-main">
+                <i class="fa-solid fa-cloud-arrow-down"></i> <span id="downloadBtnText">DOWNLOAD THE GAME</span>
             </a>
         </div>
 
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const btn = document.getElementById('downloadBtn');
+            const btnText = document.getElementById('downloadBtnText');
+
+            // Ak prebieha update (na začiatku súboru nastavené na true)
+            if (typeof UPDATE_IN_PROGRESS !== 'undefined' && UPDATE_IN_PROGRESS) {
+                btn.classList.add('updating'); // Nastaví sivý vzhľad a kurzor stop
+                btn.removeAttribute('href');    // Úplne odstráni odkaz na sťahovanie
+                btn.removeAttribute('target');  // Zruší otváranie nového okna
+                
+                // Zmení ikonu na presýpacie hodiny a prepíše text
+                btn.innerHTML = '<i class="fa-solid fa-hourglass-start"></i> <span>UPDATE IN PROGRESS...</span>';
+            }
+        });
+    </script>
 
     <footer>
         <div class="visitor-counter">
