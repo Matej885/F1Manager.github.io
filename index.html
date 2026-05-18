@@ -183,7 +183,7 @@
             text-align: center;
             border-radius: 4px;
             border: 1px solid #2d2d3d;
-            transition: 0.2s;
+            transition: all 0.2s ease;
         }
 
         .tech-item:hover {
@@ -222,18 +222,20 @@
             background: var(--discord);
             color: white;
             padding: 12px 24px;
-            text-decoration: none;
             font-weight: 700;
             font-family: 'Orbitron', sans-serif;
             font-size: 0.95rem;
             border-radius: 4px;
             margin-top: 10px;
-            transition: 0.2s;
+            transition: all 0.2s ease;
             box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
+            cursor: pointer;
+            user-select: none;
         }
         .discord-tag:hover { 
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+            background: #4752c4;
         }
 
         .george-large-btn {
@@ -251,7 +253,7 @@
             border-radius: 4px;
             margin-top: 10px;
             margin-bottom: 20px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             text-transform: uppercase;
             border: 1px solid rgba(255,255,255,0.1);
@@ -299,6 +301,14 @@
             color: #ffffff;
             font-family: 'Consolas', monospace;
             user-select: all;
+            transition: color 0.2s ease;
+        }
+        .transfer-value.clickable-iban {
+            cursor: pointer;
+            position: relative;
+        }
+        .transfer-value.clickable-iban:hover {
+            color: var(--tech-blue);
         }
 
         .download-zone {
@@ -378,7 +388,7 @@
         .visitor-counter {
             margin-bottom: 20px;
             opacity: 0.85;
-            transition: 0.2s;
+            transition: opacity 0.2s ease;
         }
         .visitor-counter:hover { opacity: 1; }
 
@@ -419,7 +429,7 @@
 
         <div class="main-grid">
             
-            <div class="left-col">
+            <main class="left-col">
                 <div class="card">
                     <h2><i class="fa-solid fa-car-tunnel"></i> SYSTEM OVERVIEW</h2>
                     <p>F1 Manager 2026 is an industrial-grade simulation placing the user at the helm of a Formula 1 team. Operational constraints scale directly across the competitive grid, simulating accurate environments ranging from small independent constructs like <strong>Minardi</strong> to high-efficiency manufacturing powerhouses like <strong>Siemens</strong>.</p>
@@ -453,9 +463,9 @@
                         Data contexts leverage native WPF asynchronous tasks (<span class="code-tag">async/await</span>) coupled with a decoupled <span class="code-tag">Database.Instance</span> Singleton pattern to guarantee memory safety and robust data persistence layers.
                     </p>
                 </div>
-            </div>
+            </main>
 
-            <div class="right-col">
+            <aside class="right-col">
                 <div class="card plan">
                     <h2><i class="fa-solid fa-gauge-high"></i> CONTINUOUS INTEGRATION & ROADMAP</h2>
                     <p>Future iterations intend to scale the simulation scope through standard deployment lifecycles:</p>
@@ -474,7 +484,7 @@
                     <h2><i class="fa-solid fa-heart"></i> SUPPORT THE DEVELOPMENT</h2>
                     <p>George Russell isn't the only George who can deliver a fast package! If you would like to support the student development of this F1 simulator, you can send a quick tip for coffee directly via Payme (Slovenská sporiteľňa / George).</p>
                     
-                    <a href="https://www.payme.sk/?V=1&IBAN=SK6709000000005205692365&CC=EUR&AM=5.00&CN=Sustek%20Matej&MSG=DONATE" target="_blank" class="george-large-btn">
+                    <a href="https://www.payme.sk/?V=1&IBAN=SK6709000000005205692365&CC=EUR&AM=5.00&CN=Sustek%20Matej&MSG=DONATE" target="_blank" rel="noopener" class="george-large-btn">
                         <i class="fa-solid fa-mobile-screen-button"></i> SEND VIA GEORGE (PAYME)
                     </a>
 
@@ -485,8 +495,8 @@
                             <span class="transfer-value">Šustek Matej</span>
                         </div>
                         <div class="transfer-row">
-                            <span class="transfer-label">IBAN:</span>
-                            <span class="transfer-value">SK67 0900 0000 0052 0569 2365</span>
+                            <span class="transfer-label">IBAN (Click to copy):</span>
+                            <span class="transfer-value clickable-iban" id="ibanText" title="Click to copy IBAN">SK67 0900 0000 0052 0569 2365</span>
                         </div>
                         <div class="transfer-row">
                             <span class="transfer-label">Message:</span>
@@ -498,11 +508,11 @@
                 <div class="card">
                     <h2><i class="fa-solid fa-headset"></i> TECHNICAL SUPPORT & COMMUNITY</h2>
                     <p>For any bug reports, suggestions or questions, CONTACT ME:</p>
-                    <a href="#" class="discord-tag">
-                        <i class="fa-brands fa-discord"></i> THUNDERBALL885
-                    </a>
+                    <div class="discord-tag" id="discordBtn" title="Click to copy Discord tag">
+                        <i class="fa-brands fa-discord"></i> <span id="discordTxt">THUNDERBALL885</span>
+                    </div>
                 </div>
-            </div>
+            </aside>
 
         </div>
 
@@ -510,7 +520,7 @@
             <h2>READY TO DEPLOY?</h2>
             <p style="color: #f1f5f9; opacity: 0.95; font-size: 1.25rem; font-weight: 400;">Download the full standalone game package.</p>
             
-            <a id="downloadBtn" href="https://drive.google.com/file/d/1Egwdx5F0tLITLk10d502BGIfDrw0UqPO/view?usp=sharing" target="_blank" class="btn-main">
+            <a id="downloadBtn" href="https://drive.google.com/file/d/1Egwdx5F0tLITLk10d502BGIfDrw0UqPO/view?usp=sharing" target="_blank" rel="noopener" class="btn-main">
                 <i class="fa-solid fa-cloud-arrow-down"></i> <span id="downloadBtnText">DOWNLOAD THE GAME</span>
             </a>
         </div>
@@ -519,6 +529,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // Správanie download tlačidla podľa tvojho pôvodného návrhu
             const btn = document.getElementById('downloadBtn');
             const btnText = document.getElementById('downloadBtnText');
 
@@ -528,6 +539,44 @@
                 btn.removeAttribute('target');  
                 
                 btn.innerHTML = '<i class="fa-solid fa-hourglass-start"></i> <span>UPDATE IN PROGRESS...</span>';
+            }
+
+            // FUNKCIA: Skopírovanie IBAN-u po kliknutí (odstráni medzery pre priame vloženie do banky)
+            const ibanBtn = document.getElementById('ibanText');
+            if(ibanBtn) {
+                ibanBtn.addEventListener('click', function() {
+                    const rawIban = this.textContent.replace(/\s/g, '');
+                    navigator.clipboard.writeText(rawIban).then(() => {
+                        const originalText = this.textContent;
+                        this.textContent = 'COPIED TO CLIPBOARD!';
+                        this.style.color = 'var(--f1-neon)';
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                            this.style.color = '#ffffff';
+                        }, 2000);
+                    });
+                });
+            }
+
+            // FUNKCIA: Skopírovanie Discord Nicku po kliknutí
+            const discordBtn = document.getElementById('discordBtn');
+            const discordTxt = document.getElementById('discordTxt');
+            if(discordBtn && discordTxt) {
+                discordBtn.addEventListener('click', function() {
+                    const nick = discordTxt.textContent;
+                    if(nick !== 'COPIED!') {
+                        navigator.clipboard.writeText('THUNDERBALL885').then(() => {
+                            discordTxt.textContent = 'COPIED!';
+                            discordBtn.style.background = 'var(--f1-neon)';
+                            discordBtn.style.color = '#000000';
+                            setTimeout(() => {
+                                discordTxt.textContent = 'THUNDERBALL885';
+                                discordBtn.style.background = 'var(--discord)';
+                                discordBtn.style.color = '#ffffff';
+                            }, 2000);
+                        });
+                    }
+                });
             }
         });
     </script>
