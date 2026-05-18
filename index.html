@@ -288,7 +288,7 @@
             background: #003b88;
         }
 
-        /* Srdiečka vyletujúce IBA z vnútra Donate tlačidla */
+        /* Výrazné a kontrastné srdiečka v Donate tlačidle */
         .internal-heart {
             position: absolute;
             font-family: "Font Awesome 6 Free";
@@ -296,11 +296,12 @@
             content: "\f004";
             pointer-events: none;
             z-index: 2;
-            animation: floatHeartUp 0.7s forwards ease-out;
+            text-shadow: 0 0 6px rgba(0, 255, 65, 0.8);
+            animation: floatHeartUp 0.65s forwards ease-out;
         }
         @keyframes floatHeartUp {
-            0% { transform: translateY(25px) scale(0.4); opacity: 1; }
-            100% { transform: translateY(-35px) scale(1.2); opacity: 0; }
+            0% { transform: translateY(25px) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-40px) scale(1.3); opacity: 0; }
         }
 
         /* DOWNLOAD ZONE */
@@ -335,7 +336,7 @@
             font-style: italic;
         }
 
-        /* DOWNLOAD MAIN BUTTON (UPRAVENÉ NA HOVER BIELU PRE VIDITEĽNOSŤ DYMU) */
+        /* DOWNLOAD MAIN BUTTON - MASÍVNE VY контраstovaný HOVER STAV */
         .btn-main {
             display: inline-flex;
             align-items: center;
@@ -347,7 +348,7 @@
             font-size: 1.3rem;
             font-weight: 900;
             text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 8px 25px rgba(0,0,0,0.4);
             border-radius: 4px;
             margin-top: 20px;
@@ -366,28 +367,29 @@
             display: inline-block;
         }
         
+        /* Pri hoveri gombík očernie, takže biely dym vnútri extrémne vyskočí von */
         .btn-main:hover, .btn-main:focus { 
             transform: translate(4px, -2px); 
-            background: #ffffff !important; /* Striktne biele pozadie pri fócuse/hoveri */
-            color: var(--f1-red) !important; /* Text ostane ostro červený */
-            box-shadow: -4px 8px 20px rgba(0,0,0,0.5);
+            background: #111116 !important; 
+            color: #ffffff !important; 
+            box-shadow: -6px 12px 25px rgba(0,0,0,0.7);
         }
         .btn-main:hover i.fa-tire {
-            animation: raceSpeedTyre 0.15s infinite linear;
+            animation: raceSpeedTyre 0.12s infinite linear;
         }
         @keyframes raceSpeedTyre {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        /* Spálené gumené šmuhy na pozadí vnútri gombíka */
+        /* Čierne šmuhy spálenej gumy na pozadí tlačidla */
         .internal-tracks {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, transparent 40%, rgba(15, 15, 15, 0.15) 100%);
+            background: linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, 0.6) 100%);
             opacity: 0;
             z-index: 2;
             transition: opacity 0.2s ease;
@@ -397,19 +399,20 @@
             opacity: 1;
         }
 
-        /* SVETLÝ BIELO-SIVÝ DYM PRE EXCELENTNÚ VIDITEĽNOSŤ */
+        /* ULTRA JASNÝ BIELY DYM - PERFEKTNE VIDITEĽNÝ NA ČIERNOM POZADÍ GOMBÍKA */
         .internal-smoke-cloud {
             position: absolute;
-            background: rgba(220, 220, 225, 0.85); /* Svetlá farba dymu */
+            background: rgba(255, 255, 255, 0.95); 
             border-radius: 50%;
             pointer-events: none;
             z-index: 3;
-            filter: blur(4px);
-            animation: smokeRiseAndFade 0.45s forwards linear;
+            filter: blur(5px);
+            animation: smokeRiseAndFade 0.4s forwards linear;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
         }
         @keyframes smokeRiseAndFade {
-            0% { transform: scale(0.3) translateY(12px); opacity: 0.9; }
-            100% { transform: scale(2.8) translateY(-25px); opacity: 0; }
+            0% { transform: scale(0.3) translateY(15px); opacity: 1; }
+            100% { transform: scale(3.2) translateY(-30px); opacity: 0; }
         }
 
         /* REŽIM ÚDRŽBY */
@@ -631,31 +634,30 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // 1. DOWNLOAD BUTTON BURNOUT (HUSTÝ SVETLÝ DYM) EFFECT
+            // 1. DOWNLOAD BUTTON BURNOUT (MASÍVNY ULTRA SVETLÝ DYM NA ČIERNOM POZADÍ)
             const downloadBtn = document.getElementById('downloadBtn');
             let smokeTimer = null;
 
             if (downloadBtn && !UPDATE_IN_PROGRESS) {
                 downloadBtn.addEventListener('mouseenter', function() {
-                    // Generovanie častíc beží oveľa rýchlejšie (každých 15ms namiesto 40ms) pre masívnejší efekt
                     smokeTimer = setInterval(function() {
                         const smoke = document.createElement('div');
                         smoke.className = 'internal-smoke-cloud';
                         
-                        const size = Math.random() * 18 + 12; // Mierne väčšie obláčiky dymu
-                        const randomLeft = Math.random() * 85 + 7; 
+                        const size = Math.random() * 16 + 14; 
+                        const randomLeft = Math.random() * 84 + 8; 
                         
                         smoke.style.width = size + 'px';
                         smoke.style.height = size + 'px';
                         smoke.style.left = randomLeft + '%';
-                        smoke.style.bottom = '-5px';
+                        smoke.style.bottom = '-8px';
                         
                         downloadBtn.appendChild(smoke);
                         
                         setTimeout(function() {
                             smoke.remove();
-                        }, 450);
-                    }, 15);
+                        }, 400);
+                    }, 12); // Extrémne rýchly cyklus pre vysokú hustotu
                 });
 
                 downloadBtn.addEventListener('mouseleave', function() {
@@ -663,7 +665,7 @@
                 });
             }
 
-            // 2. DONATE BUTTON INTERNAL HEARTS EFFECT (ZVYŠENÁ FREKVENCIA)
+            // 2. DONATE BUTTON INTERNAL HEARTS EFFECT (SÝTA FAREBNOSŤ)
             const paymeBtn = document.getElementById('paymeBtn');
             let heartTimer = null;
 
@@ -674,18 +676,19 @@
                         heart.className = 'fa-solid fa-heart internal-heart';
                         
                         const randomLeft = Math.random() * 92; 
-                        const isNeon = Math.random() > 0.35;
+                        const isNeon = Math.random() > 0.3;
                         
                         heart.style.left = randomLeft + '%';
                         heart.style.top = '12px';
+                        // Sýta svietivá zelená alebo jasná snehobiela
                         heart.style.color = isNeon ? 'var(--f1-neon)' : '#ffffff';
                         
                         paymeBtn.appendChild(heart);
                         
                         setTimeout(function() {
                             heart.remove();
-                        }, 700);
-                    }, 50); // Hustejšie vyletovanie srdiečok
+                        }, 650);
+                    }, 40); 
                 });
 
                 paymeBtn.addEventListener('mouseleave', function() {
