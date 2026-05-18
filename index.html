@@ -183,12 +183,13 @@
             text-align: center;
             border-radius: 4px;
             border: 1px solid #2d2d3d;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .tech-item:hover {
             border-color: var(--tech-blue);
             background: #1c1c27;
+            transform: translateY(-3px);
         }
 
         .tech-item i {
@@ -196,13 +197,10 @@
             color: var(--tech-blue);
             margin-bottom: 8px;
             display: block;
+            transition: transform 0.3s ease;
         }
-
-        .tech-item span {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            display: block;
-            color: #f1f5f9;
+        .tech-item:hover i {
+            transform: scale(1.15);
         }
 
         .code-tag {
@@ -214,11 +212,15 @@
             font-size: 0.95rem;
         }
 
-        /* Buttons & Tags */
+        /* ================================================================
+           ANIMOVANÉ BUTTONY & PRETEKÁRSKE EFEKTY
+           ================================================================ */
+        
+        /* DISCORD TAG S VEJÚCOU VLAJKOU */
         .discord-tag {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             background: var(--discord);
             color: white;
             padding: 12px 24px;
@@ -237,7 +239,16 @@
             box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
             background: #4752c4;
         }
+        /* Animácia vejenia vlajky */
+        .discord-tag:hover i.fa-flag-checkered {
+            animation: waveFlag 0.4s infinite alternate ease-in-out;
+        }
+        @keyframes waveFlag {
+            0% { transform: rotate(0deg) skewX(-5deg); }
+            100% { transform: rotate(15deg) skewX(10deg); }
+        }
 
+        /* GEORGE (PAYME) BUTTON S EFEKTOM RÝCHLEHO PRELETU MONOPOSTU */
         .george-large-btn {
             display: inline-flex;
             align-items: center;
@@ -259,12 +270,113 @@
             border: 1px solid rgba(255,255,255,0.1);
             width: 100%;
             box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Záblesk svetla imitujúci prelet monopostu */
+        .george-large-btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -150%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-30deg);
         }
         .george-large-btn:hover {
             transform: scale(1.02);
             background: #ffffff;
             color: var(--slsp-blue);
             box-shadow: 0 6px 22px rgba(0, 168, 255, 0.4);
+        }
+        .george-large-btn:hover::after {
+            animation: carFlyBy 0.7s forwards ease-in-out;
+        }
+        @keyframes carFlyBy {
+            0% { left: -150%; }
+            100% { left: 150%; }
+        }
+
+        /* DOWNLOAD ZONE & ZATOČENÁ PNEUMATIKA */
+        .download-zone {
+            background: linear-gradient(135deg, #e10600 0%, #990400 100%);
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 6px;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(225, 6, 0, 0.3);
+        }
+
+        .download-zone h2 {
+            font-size: 2.2rem;
+            justify-content: center;
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .btn-main {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            background: #ffffff;
+            color: var(--f1-red);
+            padding: 18px 45px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 900;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            border-radius: 4px;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+        .btn-main i.fa-tire {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        /* Hover efekty pre download tlačidlo */
+        .btn-main:hover { 
+            transform: scale(1.05); 
+            background: var(--f1-black); 
+            color: #ffffff; 
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+            animation: buttonPulse 1.5s infinite alternate;
+        }
+        /* Spustenie rotácie pneumatiky pri hoveri */
+        .btn-main:hover i.fa-tire {
+            animation: spinTyre 0.5s infinite linear;
+        }
+        
+        @keyframes spinTyre {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes buttonPulse {
+            0% { box-shadow: 0 12px 30px rgba(0,0,0,0.6); }
+            100% { box-shadow: 0 12px 35px rgba(255, 255, 255, 0.2); }
+        }
+
+        /* ŠTÝL PRE ZABLOKOVANÝ GOMBÍK POČAS UPDATE */
+        .btn-main.updating {
+            background: #333344 !important;
+            color: #888899 !important;
+            cursor: not-allowed !important;
+            pointer-events: none; 
+            transform: none !important;
+            box-shadow: none !important;
+            border: 1px solid #444455;
+            animation: none !important;
+        }
+        .btn-main.updating i {
+            animation: spinHourglass 2s infinite linear !important;
+        }
+
+        @keyframes spinHourglass {
+            0% { transform: rotate(0deg); }
+            45% { transform: rotate(180deg); }
+            100% { transform: rotate(180deg); } 
         }
 
         /* International Transfer Box */
@@ -309,71 +421,6 @@
         }
         .transfer-value.clickable-iban:hover {
             color: var(--tech-blue);
-        }
-
-        .download-zone {
-            background: linear-gradient(135deg, #e10600 0%, #990400 100%);
-            padding: 60px 40px;
-            text-align: center;
-            margin-top: 40px;
-            border-radius: 6px;
-            position: relative;
-            box-shadow: 0 15px 40px rgba(225, 6, 0, 0.3);
-        }
-
-        .download-zone h2 {
-            font-size: 2.2rem;
-            justify-content: center;
-            color: #ffffff;
-            margin-bottom: 10px;
-            font-style: italic;
-        }
-
-        /* KLASICKÝ DOWNLOAD BUTTON */
-        .btn-main {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: #ffffff;
-            color: var(--f1-red);
-            padding: 18px 45px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 900;
-            text-decoration: none;
-            transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-            border-radius: 4px;
-            margin-top: 20px;
-            text-transform: uppercase;
-        }
-
-        .btn-main:hover { 
-            transform: scale(1.05); 
-            background: var(--f1-black); 
-            color: #ffffff; 
-            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-        }
-
-        /* ŠTÝL PRE ZABLOKOVANÝ GOMBÍK POČAS UPDATE */
-        .btn-main.updating {
-            background: #333344 !important;
-            color: #888899 !important;
-            cursor: not-allowed !important;
-            pointer-events: none; 
-            transform: none !important;
-            box-shadow: none !important;
-            border: 1px solid #444455;
-        }
-
-        .btn-main.updating i {
-            animation: spinHourglass 2s infinite linear;
-        }
-
-        @keyframes spinHourglass {
-            0% { transform: rotate(0deg); }
-            45% { transform: rotate(180deg); }
-            100% { transform: rotate(180deg); } 
         }
 
         footer { 
@@ -509,7 +556,7 @@
                     <h2><i class="fa-solid fa-headset"></i> TECHNICAL SUPPORT & COMMUNITY</h2>
                     <p>For any bug reports, suggestions or questions, CONTACT ME:</p>
                     <div class="discord-tag" id="discordBtn" title="Click to copy Discord tag">
-                        <i class="fa-brands fa-discord"></i> <span id="discordTxt">THUNDERBALL885</span>
+                        <i class="fa-solid fa-flag-checkered"></i> <span id="discordTxt">THUNDERBALL885</span>
                     </div>
                 </div>
             </aside>
@@ -521,7 +568,7 @@
             <p style="color: #f1f5f9; opacity: 0.95; font-size: 1.25rem; font-weight: 400;">Download the full standalone game package.</p>
             
             <a id="downloadBtn" href="https://drive.google.com/file/d/1Egwdx5F0tLITLk10d502BGIfDrw0UqPO/view?usp=sharing" target="_blank" rel="noopener" class="btn-main">
-                <i class="fa-solid fa-cloud-arrow-down"></i> <span id="downloadBtnText">DOWNLOAD THE GAME</span>
+                <i class="fa-solid fa-tire"></i> <span id="downloadBtnText">DOWNLOAD THE GAME</span>
             </a>
         </div>
 
@@ -529,9 +576,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Správanie download tlačidla podľa tvojho pôvodného návrhu
             const btn = document.getElementById('downloadBtn');
-            const btnText = document.getElementById('downloadBtnText');
 
             if (typeof UPDATE_IN_PROGRESS !== 'undefined' && UPDATE_IN_PROGRESS) {
                 btn.classList.add('updating'); 
@@ -541,7 +586,7 @@
                 btn.innerHTML = '<i class="fa-solid fa-hourglass-start"></i> <span>UPDATE IN PROGRESS...</span>';
             }
 
-            // FUNKCIA: Skopírovanie IBAN-u po kliknutí (odstráni medzery pre priame vloženie do banky)
+            // FUNKCIA: Skopírovanie IBAN-u po kliknutí
             const ibanBtn = document.getElementById('ibanText');
             if(ibanBtn) {
                 ibanBtn.addEventListener('click', function() {
