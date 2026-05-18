@@ -124,11 +124,6 @@
         .card.plan { border-left-color: var(--f1-neon); }
         .card.donate-card { border-left-color: var(--tech-blue); background: linear-gradient(135deg, #1f2633 0%, var(--f1-card-bg) 100%); }
 
-        .card.highlight:hover { border-left-color: var(--f1-red); box-shadow: 0 20px 40px rgba(225, 6, 0, 0.15); }
-        .card.tech:hover { border-left-color: var(--tech-blue); box-shadow: 0 20px 40px rgba(0, 168, 255, 0.15); }
-        .card.plan:hover { border-left-color: var(--f1-neon); box-shadow: 0 20px 40px rgba(0, 255, 65, 0.15); }
-        .card.donate-card:hover { border-left-color: var(--tech-blue); box-shadow: 0 20px 40px rgba(0, 168, 255, 0.15); }
-
         h2 {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.3rem;
@@ -148,10 +143,6 @@
 
         p { font-size: 1.2rem; line-height: 1.6; color: #cbd5e1; margin-top: 0; margin-bottom: 15px; font-weight: 400; }
         strong { color: #ffffff; font-weight: 700; }
-        
-        ul { padding-left: 20px; color: #94a3b8; margin: 0; }
-        li { margin-bottom: 12px; font-size: 1.15rem; font-weight: 400; }
-        li strong { color: #f1f5f9; }
 
         .log-item {
             display: flex;
@@ -170,6 +161,9 @@
         }
         .card.plan .log-icon { color: var(--f1-neon); }
 
+        /* ================================================================
+           TECHNOLOGICKÁ MATRICA - EFEKT ZAHRIEVANIA PNEUMATÍK (WARMUP)
+           ================================================================ */
         .tech-matrix {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -189,7 +183,8 @@
         .tech-item:hover {
             border-color: var(--tech-blue);
             background: #1c1c27;
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 168, 255, 0.2);
         }
 
         .tech-item i {
@@ -197,10 +192,23 @@
             color: var(--tech-blue);
             margin-bottom: 8px;
             display: block;
-            transition: transform 0.3s ease;
         }
+
+        /* Simulácia kľučkovania monopostu zo strany na stranu */
         .tech-item:hover i {
-            transform: scale(1.15);
+            animation: warmupTyres 0.3s infinite alternate ease-in-out;
+        }
+
+        @keyframes warmupTyres {
+            0% { transform: translateX(-4px) rotate(-5deg); }
+            100% { transform: translateX(4px) rotate(5deg); }
+        }
+
+        .tech-item span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            display: block;
+            color: #f1f5f9;
         }
 
         .code-tag {
@@ -213,10 +221,10 @@
         }
 
         /* ================================================================
-           ANIMOVANÉ BUTTONY & PRETEKÁRSKE EFEKTY
+           KOMUNITA & PODPORA - TELEMETRIA EFEKTY A FINISH VLAJKA
            ================================================================ */
         
-        /* DISCORD TAG S VEJÚCOU VLAJKOU */
+        /* DISCORD - Odmávanie šachovnicovou vlajkou v cieli */
         .discord-tag {
             display: inline-flex;
             align-items: center;
@@ -239,16 +247,16 @@
             box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
             background: #4752c4;
         }
-        /* Animácia vejenia vlajky */
         .discord-tag:hover i.fa-flag-checkered {
-            animation: waveFlag 0.4s infinite alternate ease-in-out;
+            animation: finishFlag 0.3s infinite alternate linear;
         }
-        @keyframes waveFlag {
-            0% { transform: rotate(0deg) skewX(-5deg); }
-            100% { transform: rotate(15deg) skewX(10deg); }
+        @keyframes finishFlag {
+            0% { transform: translate(0, 0) scale(1.2) rotate(-10deg); }
+            50% { transform: translate(3px, -2px) scale(1.2) rotate(15deg); }
+            100% { transform: translate(-2px, 1px) scale(1.2) rotate(-10deg); }
         }
 
-        /* GEORGE (PAYME) BUTTON S EFEKTOM RÝCHLEHO PRELETU MONOPOSTU */
+        /* GEORGE (PAYME) - Pulzovanie ikony a prelet monopostu */
         .george-large-btn {
             display: inline-flex;
             align-items: center;
@@ -273,13 +281,12 @@
             position: relative;
             overflow: hidden;
         }
-        /* Záblesk svetla imitujúci prelet monopostu */
         .george-large-btn::after {
             content: '';
             position: absolute;
             top: 0; left: -150%;
             width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
             transform: skewX(-30deg);
         }
         .george-large-btn:hover {
@@ -288,15 +295,24 @@
             color: var(--slsp-blue);
             box-shadow: 0 6px 22px rgba(0, 168, 255, 0.4);
         }
+        .george-large-btn:hover i {
+            animation: telemetryPulse 0.4s infinite alternate ease-in-out;
+        }
         .george-large-btn:hover::after {
-            animation: carFlyBy 0.7s forwards ease-in-out;
+            animation: carFlyBy 0.6s forwards ease-in-out;
         }
         @keyframes carFlyBy {
             0% { left: -150%; }
             100% { left: 150%; }
         }
+        @keyframes telemetryPulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.25); opacity: 1; color: var(--f1-red); }
+        }
 
-        /* DOWNLOAD ZONE & ZATOČENÁ PNEUMATIKA */
+        /* ================================================================
+           DOWNLOAD ZONE & AKCELERÁCIA DO CIEĽA (GREEN LIGHTS)
+           ================================================================ */
         .download-zone {
             background: linear-gradient(135deg, #e10600 0%, #990400 100%);
             padding: 60px 40px;
@@ -305,6 +321,21 @@
             border-radius: 6px;
             position: relative;
             box-shadow: 0 15px 40px rgba(225, 6, 0, 0.3);
+            overflow: hidden;
+        }
+
+        /* Pulzovanie zóny pripomínajúce štartové svetlá semaforu */
+        .download-zone::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 80%);
+            animation: redLightsGlow 3s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+        @keyframes redLightsGlow {
+            0% { opacity: 0.3; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1.05); }
         }
 
         .download-zone h2 {
@@ -315,47 +346,46 @@
             font-style: italic;
         }
 
+        /* HLAVNÝ BUTTON — Monopost vystrelil zo zákruty */
         .btn-main {
             display: inline-flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             background: #ffffff;
             color: var(--f1-red);
-            padding: 18px 45px;
+            padding: 18px 50px;
             font-family: 'Orbitron', sans-serif;
             font-size: 1.3rem;
             font-weight: 900;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 8px 25px rgba(0,0,0,0.4);
             border-radius: 4px;
             margin-top: 20px;
             text-transform: uppercase;
+            position: relative;
         }
         .btn-main i.fa-tire {
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-        /* Hover efekty pre download tlačidlo */
-        .btn-main:hover { 
-            transform: scale(1.05); 
-            background: var(--f1-black); 
-            color: #ffffff; 
-            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-            animation: buttonPulse 1.5s infinite alternate;
-        }
-        /* Spustenie rotácie pneumatiky pri hoveri */
-        .btn-main:hover i.fa-tire {
-            animation: spinTyre 0.5s infinite linear;
+            font-size: 1.6rem;
+            transform-origin: center;
+            display: inline-block;
         }
         
-        @keyframes spinTyre {
+        .btn-main:hover { 
+            /* Prudká akcelerácia vpred (vpravo hore) + zmena farby na závodnú čiernu */
+            transform: translate(6px, -4px) scale(1.04); 
+            background: var(--f1-black); 
+            color: var(--f1-neon); /* Rozsvieti sa zelená na semafore */
+            box-shadow: -6px 12px 30px rgba(0,0,0,0.7), 0 0 25px rgba(0, 255, 65, 0.5);
+        }
+        /* Maximálne otáčky pneumatiky v akcelerácii */
+        .btn-main:hover i.fa-tire {
+            animation: raceSpeedTyre 0.25s infinite linear;
+        }
+        
+        @keyframes raceSpeedTyre {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-        @keyframes buttonPulse {
-            0% { box-shadow: 0 12px 30px rgba(0,0,0,0.6); }
-            100% { box-shadow: 0 12px 35px rgba(255, 255, 255, 0.2); }
         }
 
         /* ŠTÝL PRE ZABLOKOVANÝ GOMBÍK POČAS UPDATE */
@@ -367,12 +397,10 @@
             transform: none !important;
             box-shadow: none !important;
             border: 1px solid #444455;
-            animation: none !important;
         }
         .btn-main.updating i {
             animation: spinHourglass 2s infinite linear !important;
         }
-
         @keyframes spinHourglass {
             0% { transform: rotate(0deg); }
             45% { transform: rotate(180deg); }
@@ -582,11 +610,10 @@
                 btn.classList.add('updating'); 
                 btn.removeAttribute('href');    
                 btn.removeAttribute('target');  
-                
                 btn.innerHTML = '<i class="fa-solid fa-hourglass-start"></i> <span>UPDATE IN PROGRESS...</span>';
             }
 
-            // FUNKCIA: Skopírovanie IBAN-u po kliknutí
+            // FUNKCIA: Skopírovanie IBAN-u
             const ibanBtn = document.getElementById('ibanText');
             if(ibanBtn) {
                 ibanBtn.addEventListener('click', function() {
@@ -603,7 +630,7 @@
                 });
             }
 
-            // FUNKCIA: Skopírovanie Discord Nicku po kliknutí
+            // FUNKCIA: Skopírovanie Discord Nicku
             const discordBtn = document.getElementById('discordBtn');
             const discordTxt = document.getElementById('discordTxt');
             if(discordBtn && discordTxt) {
